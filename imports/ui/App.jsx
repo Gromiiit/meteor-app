@@ -9,6 +9,20 @@ export const App = () => {
 
   const {result, firstDividerCount, secondDividerCount, combinedCount, plainNumbersCount} = useAlgorithm(bottomValue, upperValue, firstDivider, secondDivider);
 
+  const download = (data, type) => {
+      const hiddenElement = document.createElement('a');
+      if(type === "csv"){
+        hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(data);
+        hiddenElement.download = 'output.csv';
+      }
+      else{
+        hiddenElement.href = 'data:text/plain;charset=utf-8,' + encodeURI(data);
+        hiddenElement.download = 'output.txt';
+      }
+      hiddenElement.target = '_blank';
+      hiddenElement.click();
+  }
+
   return (
     <div>
       <h1>Welcome to Meteor!</h1>
@@ -57,6 +71,18 @@ export const App = () => {
           <label>{firstDivider.name + secondDivider.name} count:</label><a>{combinedCount}</a>
           <label>Plain number count:</label><a>{plainNumbersCount}</a>
         </div>
+      </div>
+
+      <div>
+        <button onClick={() => download(result.map((x, i) => `${i + bottomValue},${x}\n`).join(''), "csv")}>
+          Download CSV
+        </button>
+      </div>
+
+      <div>
+        <button onClick={() => download(result.map((x, i) => `${i + bottomValue},${x}\n`).join(''), "txt")}>
+          Download TXT
+        </button>
       </div>
 
       <div>
