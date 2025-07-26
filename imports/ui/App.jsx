@@ -7,51 +7,65 @@ export const App = () => {
   const [firstDivider, setFirstDivider] = useState(Meteor.settings.public.firstDivider);
   const [secondDivider, setSecondDivider] = useState(Meteor.settings.public.secondDivider);
 
-  const algorithmArr = useAlgorithm(bottomValue, upperValue, firstDivider, secondDivider);
+  const {result, firstDividerCount, secondDividerCount, combinedCount, plainNumbersCount} = useAlgorithm(bottomValue, upperValue, firstDivider, secondDivider);
 
   return (
     <div>
       <h1>Welcome to Meteor!</h1>
 
-      <label>Bottom limit:</label>
-      <input
-        type="number"
-        value={bottomValue}
-        onChange={e => setBottomValue(Number(e.target.value))}
-      />
-      
-      <label>Upper limit:</label>
-      <input
-        type="number"
-        value={upperValue}
-        onChange={e => setUpperValue(Number(e.target.value))}
-      />
+      <div>
+        <label>Bottom limit:</label>
+        <input
+          type="number"
+          value={bottomValue}
+          onChange={e => setBottomValue(Number(e.target.value))}
+        />
+        
+        <label>Upper limit:</label>
+        <input
+          type="number"
+          value={upperValue}
+          onChange={e => setUpperValue(Number(e.target.value))}
+        />
 
-      <label>First divisor:</label>
-      <input
-        type="number"
-        value={firstDivider.value}
-        onChange={e => setFirstDivider(prev => ({
-          ...prev,
-          value: Number(e.target.value)
-        }))}
-      />
-      
-      <label>Second divisor:</label>
-      <input
-        type="number"
-        value={secondDivider.value}
-        onChange={e => setSecondDivider(prev => ({
-          ...prev,
-          value: Number(e.target.value)
-        }))}
-      />
-      
-      <table>
-        <tbody>
-          {algorithmArr.map(x => <tr><td>{x}</td></tr>)}
-        </tbody>
-      </table>
+        <label>First divisor:</label>
+        <input
+          type="number"
+          value={firstDivider.value}
+          onChange={e => setFirstDivider(prev => ({
+            ...prev,
+            value: Number(e.target.value)
+          }))}
+        />
+
+        <label>Second divisor:</label>
+        <input
+          type="number"
+          value={secondDivider.value}
+          onChange={e => setSecondDivider(prev => ({
+            ...prev,
+            value: Number(e.target.value)
+          }))}
+        />
+      </div>
+
+      <div>
+        <label>Statistics</label>
+        <div>
+          <label>{firstDivider.name} count:</label><a>{firstDividerCount}</a>
+          <label>{secondDivider.name} count:</label><a>{secondDividerCount}</a>
+          <label>{firstDivider.name + secondDivider.name} count:</label><a>{combinedCount}</a>
+          <label>Plain number count:</label><a>{plainNumbersCount}</a>
+        </div>
+      </div>
+
+      <div>
+        <table>
+          <tbody>
+            {result.map((x, i) => <tr key={i}><td>{x}</td></tr>)}
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 };
