@@ -1,13 +1,23 @@
-import React from 'react';
-import { Hello } from './Hello.jsx';
-import { Info } from './Info.jsx';
+import React, { useEffect } from 'react';
+import useAlgorithm from './Algorithm.jsx';
 
-export const App = () => (
-  <div>
-    <h1>Welcome to Meteor!</h1>
-    <h2>{Meteor.settings.public.bottomValue}</h2>
-    <h2>{Meteor.settings.public.upperValue}</h2>
-    <Hello/>
-    <Info/>
-  </div>
-);
+export const App = () => {
+  const bottomValue = Meteor.settings.public.bottomValue;
+  const upperValue = Meteor.settings.public.upperValue;
+  const algorithmArr = useAlgorithm(bottomValue, upperValue);
+
+  useEffect(() => {
+  	console.log(algorithmArr);
+  }, [algorithmArr]);
+
+  return (
+    <div>
+      <h1>Welcome to Meteor!</h1>
+      <table>
+        <tbody>
+          {algorithmArr.map(x => <tr><td>{x}</td></tr>)}
+        </tbody>
+      </table>
+    </div>
+  )
+};
