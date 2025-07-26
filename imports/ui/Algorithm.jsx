@@ -9,15 +9,22 @@ export default function useAlgorithm(start, end, firstDivider, secondDivider) {
         const result = [];
 
         for (let i = start; i <= end; i++) {
-            if (i % combinedValue === 0) { 
-                result.push(combinedName);
-            } else if (i % firstDivider.value === 0) {
-                result.push(firstDivider.name);
-            } else if (i % secondDivider.value === 0) {
-                result.push(secondDivider.name);
-            } else {
-                result.push(String(i));
+            let val = "";
+
+            if(i % firstDivider.value === 0)
+            {
+                val += firstDivider.name;
             }
+            if(i % secondDivider.value === 0)
+            {
+                val += secondDivider.name;
+            }
+            if(!val)
+            {
+                val = String(i);
+            }
+
+            result.push(val);
         }
         
         return result;
