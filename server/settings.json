@@ -1,6 +1,14 @@
 {
   "public": {
-    "bottomValue": 1,
-    "upperValue": 100
+    "bottomValue": 4,
+    "upperValue": 95,
+    "firstDivider": {
+      "name": "Robot",
+      "value": 4
+    },
+    "secondDivider": {
+      "name": "ICT",
+      "value": 5
+    }
   }
 }

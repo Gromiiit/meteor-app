@@ -1,21 +1,25 @@
 import React from 'react';
 import { useMemo, useState } from 'react';
 
-export default function useAlgorithm(start, end) {
+export default function useAlgorithm(start, end, firstDivider, secondDivider) {
+    const combinedName = firstDivider.name + secondDivider.name;
+    const combinedValue = firstDivider.value * secondDivider.value;
+
     return useMemo(() => {
         const result = [];
+
         for (let i = start; i <= end; i++) {
-            if (i % 15 === 0) { 
-                result.push('RobotICT');
-            } else if (i % 3 === 0) {
-                result.push('Robot');
-            } else if (i % 5 === 0) {
-                result.push('ICT');
+            if (i % combinedValue === 0) { 
+                result.push(combinedName);
+            } else if (i % firstDivider.value === 0) {
+                result.push(firstDivider.name);
+            } else if (i % secondDivider.value === 0) {
+                result.push(secondDivider.name);
             } else {
                 result.push(String(i));
             }
         }
         
         return result;
-    }, [start, end]);
+    }, [start, end, firstDivider, secondDivider]);
 }
