@@ -1,4 +1,20 @@
-body {
-  padding: 10px;
-  font-family: sans-serif;
+label {
+  display: block;
+  font-weight: bold;
+}
+
+input[type="number"] {
+  display: block;
+}
+
+div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.table-container {
+  border: 1px solid;
 }

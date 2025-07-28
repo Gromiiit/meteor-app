@@ -77,15 +77,12 @@ export const App = () => {
         <button onClick={() => download(result.map((x, i) => `${i + bottomValue},${x}\n`).join(''), "csv")}>
           Download CSV
         </button>
-      </div>
-
-      <div>
         <button onClick={() => download(result.map((x, i) => `${i + bottomValue},${x}\n`).join(''), "txt")}>
           Download TXT
         </button>
       </div>
 
-      <div>
+      <div className='table-container'>
         <table>
           <tbody>
             {result.map((x, i) => <tr key={i}><td>{x}</td></tr>)}
